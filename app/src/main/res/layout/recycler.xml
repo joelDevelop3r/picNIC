@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/Relative"
+    android:id="@+id/Card_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="#A6ACAF "
+    android:background="#FFC107"
     android:orientation="vertical">
 
     <ImageView
@@ -29,6 +29,7 @@
         android:textSize="20dp" />
 
     <TextView
+        android:id="@+id/Descricion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -39,6 +40,16 @@
         android:layout_marginEnd="18dp"
         android:layout_toEndOf="@id/img1"
         android:text="Descricion de la tarea" />
+
+
+    <CheckBox
+        android:id="@+id/CheckWork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="@+id/NameWork"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        />
 
 
 </RelativeLayout>

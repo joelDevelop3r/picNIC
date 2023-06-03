@@ -8,19 +8,19 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var RecyclerView: RecyclerView
-    private lateinit var tareas :MutableList<String>
-    private lateinit var  layout : RecyclerView.LayoutManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tareas = getJob()// cree un funcion que simula los dato a resivir del json
-        RecyclerView= findViewById(R.id.recyclerView)
-        layout = LinearLayoutManager(this)
+        val recyclerView= findViewById<RecyclerView>(R.id.recyclerView)
+        val adapter =  MyAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
 
     }
+
 
     //Lista mutable con las tareas a realizar
     private fun getJob(): MutableList<String>{
