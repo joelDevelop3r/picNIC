@@ -1,6 +1,8 @@
 package com.example.project
 
+import android.icu.text.Transliterator.Position
 import android.view.LayoutInflater
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
@@ -10,8 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder?>() {
 
-    private var title = arrayOf("Leer" ,"Jugar","Escribir" ,"Escuchar musica" ,"Practicar" ,"Correr" ,"Cenar","Ir al cine ","Salir" ,"Gym")
-    private var Description = arrayOf("leer media hora","lol","practicar","por 30 minutos","el ingles","corre 30 min","preparala","ver the flash","ir a la tienda","ir por 1 hora")
+    private var title = mutableListOf<String>("Leer" ,"Jugar","Escribir" ,"Escuchar musica" ,"Practicar" ,"Correr" ,"Cenar","Ir al cine ","Salir" ,"Gym")
+    private var Description = mutableListOf<String>("leer media hora","lol","practicar","por 30 minutos","el ingles","corre 30 min","preparala","ver the flash","ir a la tienda","ir por 1 hora")
+    private var listaActividades: List<Actividad> =singleton.obtenerListaActividades() as List<Actividad>
+
+    fun actualizarLista(nuevaLista: List<Actividad>){
+        listaActividades=nuevaLista
+        notifyDataSetChanged()
+    }
     interface OnItemClikListener {
         fun onItemClick(position: Int)
     }
@@ -26,10 +34,19 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder?>() {
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.txtViewDescrip.text = title[position]
-        viewHolder.txtViewDescrip.text = Description[position]
-        viewHolder.checkwork
-        viewHolder.imglog
+        listaActividades =singleton.obtenerListaActividades()
+        if(position<listaActividades.size){
+            viewHolder.txtViewWork.text = listaActividades[position].getNombre()
+            viewHolder.txtViewDescrip.text = "hi"
+            viewHolder.checkwork
+            viewHolder.imglog
+
+            viewHolder.imglog.setOnCreateContextMenuListener { menu, _, _ ->
+                val inflater  = MenuInflater(viewHolder.imglog.context)
+                inflater.inflate(R.menu.menu_contextual, menu)
+            }
+        }
+
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -50,6 +67,11 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder?>() {
                 listener.onItemClick(absoluteAdapterPosition)
             }
         }
+    }
+
+    fun Eliminar () {
+
+
     }
 }
 
